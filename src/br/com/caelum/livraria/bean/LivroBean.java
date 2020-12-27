@@ -61,10 +61,31 @@ public class LivroBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage("autor", new FacesMessage("Livro deve possuir pelo menos um autor"));
 			return;
 		}
+		
+		if(this.livro.getId() == null) {
+			new DAO<Livro>(Livro.class).adiciona(this.livro);			
+		}
+		else {
+			new DAO<Livro>(Livro.class).atualiza(this.livro);
+		}
 
-		new DAO<Livro>(Livro.class).adiciona(this.livro);
 
 		this.livro = new Livro();
+	}
+	
+	public void remover(Livro livro) {
+		System.out.println("metodo remover");
+		new DAO<Livro>(Livro.class).remove(livro);
+		
+	}
+	
+	public void carregar(Livro livro) {
+		System.out.println("metodo carregar");
+		this.livro = livro;
+	}
+	
+	public void removerAutorDoLivro(Autor autor) {
+		this.livro.removeAutor(autor);
 	}
 
 	public void comecaComDigitoUm(FacesContext fc, UIComponent component,
