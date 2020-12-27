@@ -14,9 +14,24 @@ import br.com.caelum.livraria.util.ForwardView;
 public class AutorBean {
 
 	private Autor autor = new Autor();
+	
+	private Integer autorId;
+	
+	
+	public Integer getAutorId() {
+		return autorId;
+	}
+
+	public void setAutorId(Integer autorId) {
+		this.autorId = autorId;
+	}
 
 	public Autor getAutor() {
 		return autor;
+	}
+	
+	public void carregaAutorPelaId() {
+		this.autor = new DAO<Autor>(Autor.class).buscaPorId(autorId);
 	}
 	
 	public List<Autor> getAutores() {
@@ -48,5 +63,7 @@ public class AutorBean {
 		System.out.println("metodo de carregar o autor: " + autor);
 		this.autor = autor;
 	}
+	
+
 	
 }
